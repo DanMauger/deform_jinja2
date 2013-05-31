@@ -12,17 +12,18 @@ from pyramid import testing
 from deform_jinja2.translator import PyramidTranslator
 import translationstring
 
+
 class TestTranslation(unittest.TestCase):
     def setUp(self):
         request = testing.DummyRequest()
         settings={'deform_jinja2.template_search_path':'deform_jinja2:uni_templates'}
         self.config = testing.setUp(request=request, settings=settings)
         self.config.include('deform_jinja2')
-        
+
     def runTest(self):
         # runTest() defined to allow TestTranslation() in console
         pass # pragma no cover
-        
+
     def test_translation(self):
         invalid = None
         # From colander.Range():
@@ -40,7 +41,7 @@ class TestTranslation(unittest.TestCase):
         assert invalid, "ValidationFailure was not raised"
         assert "ctrlHolder" in invalid, "uni-form template was not used"
         assert "value is less than minimum value min" in invalid
-        
+
     def excercise_translator(self, t):
         assert t.gettext('term') == 'term'
         assert t.ngettext('term', 'terms', 2) == 'terms'
@@ -51,13 +52,35 @@ class TestTranslation(unittest.TestCase):
         t = PyramidTranslator()
         _ = translationstring.TranslationStringFactory('deform')
         self.excercise_translator(t)
-                
+
     def test_dummy_translator(self):
         dt = deform_jinja2.DummyTranslator()
         self.excercise_translator(dt)
-        
+
     def test_default_translator_is_dummy(self):
         rf = deform_jinja2.jinja2_renderer_factory() # coverage
         assert rf.env.globals['gettext'] == deform_jinja2.DummyTranslator().gettext
         assert rf.env.globals['ngettext'] == deform_jinja2.DummyTranslator().ngettext
-        
+
+class TestJinja2Renderer(unittest.TestCase):
+    def test_add_filter(self):
+        rf = deform_jinja2.jinja2_renderer_factory() # coverage
+        rf.add_filter('awesome_filter', lambda value: value[1:])
+
+        assert 'awesome_filter' in rf.env.filters
+
+class TestPyramidIntegration(unittest.TestCase):
+    def test_add_filter(self):
+        from pyramid import testing
+        config = testing.setUp()
+        config.include('deform_jinja2')
+
+        def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
+            return value.strftime(format)
+
+        assert hasattr(config, 'add_jinja2_filter')
+
+        config.add_jinja2_filter('datetimeformat', datetimeformat)
+
+        renderer = config.registry['deform_jinja2_renderer']
+        assert 'datetimeformat' in renderer.env.filters

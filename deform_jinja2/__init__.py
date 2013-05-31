@@ -59,6 +59,9 @@ class jinja2_renderer_factory(object):
     def add_search_path(self, path):
         self.env.loader.searchpath.append(resource_filename(*(path.split(':'))))
 
+    def add_filter(self, name, func):
+        self.env.filters[name] = func
+
     def __call__(self, tname, **kw):
         if not '.jinja2' in tname:
             tname += '.jinja2'
@@ -77,3 +80,10 @@ def includeme(config):
             translator=PyramidTranslator(domain=domain))
     deform.Form.set_default_renderer(renderer)
 
+
+    def add_filter(config, name, func):
+        renderer.add_filter(name, func)
+
+    config.add_directive('add_jinja2_filter', add_filter)
+
+    config.registry['deform_jinja2_renderer'] = renderer
