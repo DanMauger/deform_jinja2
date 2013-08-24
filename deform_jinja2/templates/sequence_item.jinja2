@@ -1,4 +1,4 @@
-{% if not field.widget.hidden %}
+{% if not field.widget.hidden -%}
 <li
 {% if field.error and field.widget.error_class %}
  class="{{ field.widget.error_class }}"
