@@ -5,12 +5,15 @@
         {% if field.widget.css_class %}
        class="{{ field.widget.css_class }}"
         {% endif %}
-       id="{{ field.oid }}"/>
+       id="{{ field.oid }}"
+        {% if field.description %}
+            title="{{ _(field.description) }}"
+        {% endif %} />
 <script type="text/javascript">
     deform.addCallback(
             '{{ field.oid }}',
             function (oid) {
-                $('#' + oid).datetimepicker({{ options }});
+                $('#' + oid).tooltip({'position': { my: 'left center', at: 'right+10 center' }, 'tooltipClass': 'right'}).datetimepicker({{ options }});
             }
     );
 </script>

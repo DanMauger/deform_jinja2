@@ -7,7 +7,7 @@
         {% endif %}
        id="{{field.oid}}"
         {% if field.description %}
-       placeholder="{{ _(field.description) }}"
+       title="{{ _(field.description) }}"
         {% endif %}/>
 {% if field.widget.mask %}
     <script type="text/javascript">
@@ -15,7 +15,16 @@
                 '{{field.oid}}',
                 function (oid) {
                     $("#" + oid).mask("{{ field.widget.mask }}",
-                            {placeholder:"{{ field.widget.mask_placeholder }}"});
+                            {placeholder:"{{ field.widget.mask_placeholder }}"}).tooltip({'position': { my: 'left center', at: 'right+10 center' }, 'tooltipClass': 'right'});
+                });
+    </script>
+{% else %}
+    <script type="text/javascript">
+        //http://jsfiddle.net/kyBwU/2114/
+        deform.addCallback(
+                '{{field.oid}}',
+                function (oid) {
+                    $("#" + oid).tooltip({'position': { my: 'left center', at: 'right+10 center' }, 'tooltipClass': 'right'});
                 });
     </script>
 {% endif %}

@@ -8,8 +8,16 @@
         {% if field.widget.css_class %}
             class="{{ field.widget.css_class }}"
         {% endif %}
-            id="{{ field.oid }}"
-            name="{{ field.name }}"
+        id="{{ field.oid }}"
+        name="{{ field.name }}"
         {% if field.description %}
             placeholder="{{ _(field.description) }}"
         {% endif %}>{{ cstruct }}</textarea>
+<script type="text/javascript">
+    deform.addCallback(
+         '{{ field.oid }}',
+         function (oid) {
+             $('#' + oid).tooltip({'position': { my: 'left center', at: 'right+10 center' }, 'tooltipClass': 'right'});
+         }
+    );
+</script>
