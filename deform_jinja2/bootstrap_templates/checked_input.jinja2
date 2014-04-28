@@ -12,7 +12,7 @@
                 {% endif %}
                id="{{ field.oid }}"
                 {% if field.description %}
-               placeholder="{{ _(field.description) }}"
+               title="{{ _(field.description) }}"
                 {% endif %}/>
     </div>
     <div class="row">
@@ -26,7 +26,7 @@
                 {% endif %}
                id="{{ field.oid }}-confirm"
                 {% if field.description %}
-               placeholder="{{ _(field.description) }}"
+               title="{{ _(field.description) }}"
                 {% endif %}/>
     </div>
     {% if  field.widget.mask %}

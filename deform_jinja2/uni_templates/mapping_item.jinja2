@@ -5,11 +5,11 @@
     {% else %}
     class="ctrlHolder"
     {% endif %}
-    title="{{_(field.description)}}" id="item-{{field.oid}}">
+    id="item-{{field.oid}}">
 {% endif %}
 <!-- mapping_item -->
 {% if not (field.widget.hidden or field.widget.category=='structural') %}
-    <label class="desc" title="{{_(field.description)}}" for="{{field.oid}}">
+    <label class="desc" for="{{field.oid}}">
     {{_(field.title)}}
     {% if field.required %}
         <span class="req" id="req-{{field.oid}}">*</span>

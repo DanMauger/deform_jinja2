@@ -10,7 +10,7 @@
     deform.addCallback(
             '{{ field.oid }}',
             function (oid) {
-                $('#' + oid).datetimepicker({{ options }});
+                $('#' + oid).datetimepicker({'dateFormat': {{ date_options_json }}, 'timeFormat': {{ time_options_json }}});
             }
     );
 </script>

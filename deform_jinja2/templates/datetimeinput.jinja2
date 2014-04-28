@@ -13,7 +13,7 @@
     deform.addCallback(
             '{{ field.oid }}',
             function (oid) {
-                $('#' + oid).tooltip({'position': { my: 'left center', at: 'right+10 center' }, 'tooltipClass': 'right'}).datetimepicker({{ options }});
+                $('#' + oid).tooltip({'position': { my: 'center bottom', at: 'center top-10' }, 'tooltipClass': 'top'}).datetimepicker({{ options }});
             }
     );
 </script>

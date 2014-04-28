@@ -1,5 +1,5 @@
 {% if not field.widget.hidden %}
-<li title="{{ field.description }}">
+<li>
 {% endif %}
   <!-- sequence_item -->
   {{ field.serialize(cstruct, readonly=True) }}

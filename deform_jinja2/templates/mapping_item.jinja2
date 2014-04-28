@@ -3,15 +3,12 @@
     {% if field.error and field.widget.error_class %}
     class="{{field.widget.error_class}}"
     {% endif %}
-    {% if field.description %}
-    title="{{_(field.description)}}" 
-    {% endif %}
     id="item-{{field.oid}}">
 {% endif %}
 
 <!-- mapping_item -->
 {% if not (field.widget.hidden or field.widget.category=='structural') %}
-    <label class="desc" title="{{_(field.description)}}" for="{{field.oid}}">
+    <label class="desc" for="{{field.oid}}">
     {{_(field.title)}}{% if field.required %}<span class="req" id="req-{{field.oid}}">*</span>{% endif %}
     </label>
 {% endif %}

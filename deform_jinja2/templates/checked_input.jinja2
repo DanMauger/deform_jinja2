@@ -11,7 +11,7 @@
         {% endif %}
         id="{{ field.oid }}"
 	{% if field.description %}
-        placeholder="{{ _(field.description) }}"
+        title="{{ _(field.description) }}"
         {% endif %}/>
   </li>
   <li>
@@ -25,7 +25,7 @@
         {% endif %}
         id="{{ field.oid }}-confirm"
         {% if field.description %}
-        placeholder="{{ _(field.description) }}"
+        title="{{ _(field.description) }}"
         {% endif %}/>
   </li>
 </ul>
