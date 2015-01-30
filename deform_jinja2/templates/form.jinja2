@@ -1,7 +1,9 @@
 <form id="{{field.formid}}" action="{{field.action}}" method="{{field.method}}"
       enctype="multipart/form-data" accept-charset="utf-8"
 {% if field.css_class %}
- class="{{field.css_class}}"
+ class="{{field.css_class}} pure-form pure-form-aligned"
+{% else %}
+ class="pure-form pure-form-aligned"
 {% endif %}
 >
   <fieldset class="deformFormFieldset">
